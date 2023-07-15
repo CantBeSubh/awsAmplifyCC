@@ -4,8 +4,10 @@ import './App.css'
 import CreateNote from "./ui-components/CreateNote"
 import UpdateNote from "./ui-components/UpdateNote"
 import { useState } from "react"
+import { withAuthenticator } from "@aws-amplify/ui-react"
+import { DataStore } from "aws-amplify"
 
-function App() {
+function App({ signOut }: { signOut: () => void }) {
 
   const [showCreateNoteModal, setShowCreateNoteModal] = useState(false)
   const [showUpdateNoteModal, setShowUpdateNoteModal] = useState(false)
@@ -18,7 +20,12 @@ function App() {
         marginBottom="20px"
         overrides={{
           Button31632483: { onClick: () => setShowCreateNoteModal(true) },
-          Button31632487: { onClick: () => setShowUpdateNoteModal(true) },
+          Button31632487: {
+            onClick: async () => {
+              signOut()
+              await DataStore.clear()
+            }
+          }
         }}
       />
       <div className="container">
@@ -65,4 +72,4 @@ function App() {
   )
 }
 
-export default App
+export default withAuthenticator(App)

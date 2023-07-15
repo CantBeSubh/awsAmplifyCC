@@ -10,6 +10,11 @@
       "StackName": "amplify-awsamplifycc-staging-64048",
       "StackId": "arn:aws:cloudformation:ap-south-1:817190391051:stack/amplify-awsamplifycc-staging-64048/88850d20-22da-11ee-b4d6-0acd2a68c53e",
       "AmplifyAppId": "dbl3j5gys5vdq"
+    },
+    "categories": {
+      "auth": {
+        "awsAmplifyCC": {}
+      }
     }
   }
 }
