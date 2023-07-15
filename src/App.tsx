@@ -7,7 +7,9 @@ import { useState } from "react"
 import { withAuthenticator } from "@aws-amplify/ui-react"
 import { DataStore } from "aws-amplify"
 
-function App({ signOut }: { signOut: () => void }) {
+//Property 'signOut' is missing in type '{}' but required in type '{ signOut: () => void; }'
+// @ts-ignore
+function App({ signOut }: { signOut: () => void } | {}) {
 
   const [showCreateNoteModal, setShowCreateNoteModal] = useState(false)
   const [showUpdateNoteModal, setShowUpdateNoteModal] = useState(false)
@@ -69,7 +71,8 @@ function App({ signOut }: { signOut: () => void }) {
         />
       </div>
       <footer>
-        <p>Created by <a href="https://github.com/h0lycow/">HolyCow↗️ </a></p>
+        <p>Created by <a href="https://github.com/h0lycow/
+        ">HolyCow↗️ </a></p>
       </footer>
     </>
   )
