@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import { Amplify } from 'aws-amplify'
 import { AmplifyProvider } from '@aws-amplify/ui-react'
+import "@aws-amplify/ui-react/styles.css"
 // @ts-ignore
 import aws_exports from './aws-exports'
 

@@ -5,6 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
+import { Note } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ButtonProps, DividerProps, FlexProps, IconProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -20,6 +21,8 @@ export declare type UpdateNoteOverridesProps = {
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type UpdateNoteProps = React.PropsWithChildren<Partial<FlexProps> & {
+    note?: Note;
+} & {
     overrides?: UpdateNoteOverridesProps | undefined | null;
 }>;
 export default function UpdateNote(props: UpdateNoteProps): React.ReactElement;

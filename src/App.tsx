@@ -1,33 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import NavBar from "./ui-components/NavBar"
+import NoteUICollection from "./ui-components/NoteUICollection"
 import './App.css'
+import CreateNote from "./ui-components/CreateNote"
+import UpdateNote from "./ui-components/UpdateNote"
+import { useState } from "react"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [showCreateNoteModal, setShowCreateNoteModal] = useState(false)
+  const [showUpdateNoteModal, setShowUpdateNoteModal] = useState(false)
+  const [updateNote, setUpdateNote] = useState()
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <NavBar
+        width="100%"
+        marginBottom="20px"
+        overrides={{
+          Button31632483: { onClick: () => setShowCreateNoteModal(true) },
+          Button31632487: { onClick: () => setShowUpdateNoteModal(true) },
+        }}
+      />
+      <div className="container">
+        <NoteUICollection overrideItems={({ item }) => {
+          return {
+            overrides: {
+              Vector31472745: {
+                // as: 'button',
+                onClick: () => {
+                  setShowUpdateNoteModal(true)
+                  setUpdateNote(item)
+                }
+              }
+            }
+          }
+        }}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      {/* @ts-ignore */}
+      <div className="modal" style={{ display: !showCreateNoteModal && "none" }}>
+        <CreateNote
+          overrides={{
+            MyIcon: {
+              onClick: () => setShowCreateNoteModal(false),
+              as: "button"
+            },
+          }}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* @ts-ignore */}
+      <div className="modal" style={{ display: !showUpdateNoteModal && "none" }}>
+        <UpdateNote
+          overrides={{
+            MyIcon: {
+              onClick: () => setShowUpdateNoteModal(false),
+              as: "button"
+            },
+          }}
+          // @ts-ignore
+          note={updateNote}
+        />
+      </div>
     </>
   )
 }

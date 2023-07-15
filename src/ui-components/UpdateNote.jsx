@@ -6,10 +6,33 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Note } from "../models";
+import {
+  getOverrideProps,
+  useDataStoreUpdateAction,
+  useStateMutationAction,
+} from "@aws-amplify/ui-react/internal";
+import { schema } from "../models/schema";
 import { Button, Divider, Flex, Icon, TextField } from "@aws-amplify/ui-react";
 export default function UpdateNote(props) {
-  const { overrides, ...rest } = props;
+  const { note, overrides, ...rest } = props;
+  const [
+    textFieldThreeOneSixZeroTwoFourSevenEightValue,
+    setTextFieldThreeOneSixZeroTwoFourSevenEightValue,
+  ] = useStateMutationAction("");
+  const [
+    textFieldThreeOneSixZeroTwoFourSevenOneValue,
+    setTextFieldThreeOneSixZeroTwoFourSevenOneValue,
+  ] = useStateMutationAction("");
+  const buttonOnClick = useDataStoreUpdateAction({
+    model: Note,
+    id: note?.id,
+    fields: {
+      title: textFieldThreeOneSixZeroTwoFourSevenEightValue,
+      content: textFieldThreeOneSixZeroTwoFourSevenOneValue,
+    },
+    schema: schema,
+  });
   return (
     <Flex
       gap="16px"
@@ -92,6 +115,12 @@ export default function UpdateNote(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
+            value={textFieldThreeOneSixZeroTwoFourSevenEightValue}
+            onChange={(event) => {
+              setTextFieldThreeOneSixZeroTwoFourSevenEightValue(
+                event.target.value
+              );
+            }}
             {...getOverrideProps(overrides, "TextField31602478")}
           ></TextField>
           <TextField
@@ -103,6 +132,12 @@ export default function UpdateNote(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
+            value={textFieldThreeOneSixZeroTwoFourSevenOneValue}
+            onChange={(event) => {
+              setTextFieldThreeOneSixZeroTwoFourSevenOneValue(
+                event.target.value
+              );
+            }}
             {...getOverrideProps(overrides, "TextField31602471")}
           ></TextField>
         </Flex>
@@ -124,6 +159,9 @@ export default function UpdateNote(props) {
           isDisabled={false}
           variation="primary"
           children="Save"
+          onClick={() => {
+            buttonOnClick();
+          }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
       </Flex>
