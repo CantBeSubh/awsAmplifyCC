@@ -15,4 +15,7 @@ export default defineConfig({
       './runtimeConfig': './runtimeConfig.browser',
     },
   },
+  build: {
+    outDir: 'build',
+  }
 });
