@@ -68,6 +68,9 @@ function App({ signOut }: { signOut: () => void }) {
           note={updateNote}
         />
       </div>
+      <footer>
+        <p>Created by <a href="https://github.com/h0lycow/">HolyCow↗️ </a></p>
+      </footer>
     </>
   )
 }
